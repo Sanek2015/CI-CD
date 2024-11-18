@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Или 'ubuntu-latest', если ваш проект не зависит от Windows
+    runs-on: ubuntu-latest  # Рекомендуется использование 'ubuntu-latest' для C-программ
 
     steps:
     - name: Checkout code
@@ -19,26 +19,22 @@ jobs:
     - name: Set up build environment
       run: |
         echo "Установка необходимых зависимостей"
-        # Здесь вы можете установить необходимые зависимости для сборки вашего проекта
+        sudo apt-get update
+        sudo apt-get install -y build-essential  # Установка необходимых для C инструментов
 
-    - name: Build the project
+    - name: Compile the project
       run: |
         echo "Сборка проекта"
-        # Здесь вы можете добавить команды сборки, например:
-        # dotnet build
-        # или
-        # npm install и затем npm run build
+        gcc -o app app.c  # Компиляция вашего приложения
 
     - name: Run tests
       run: |
         echo "Запуск тестов"
-        # Добавьте команду для запуска тестов, например:
-        # dotnet test
-        # или
-        # npm test
+        # Добавьте команду для проверки работы вашего приложения
+        ./app  # Запускаем ваше приложение, чтобы проверить его работу
 
     - name: Deploy
       run: |
         echo "Деплой приложения"
-        # Здесь вы можете добавить команды для деплоя, если это необходимо.
-        # Например, использование scp для передачи файлов на сервер или вызов API для деплоя.
+        # Здесь вы можете добавить команды для деплоя, например:
+        # scp app user@your-server:/path/to/deployment/ или вызов API для деплоя.
