@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Замените на вашу ветку, если необходимо
+  pull_request:
+    branches:
+      - main  # Замените на вашу ветку, если необходимо
+
+jobs:
+  build:
+    runs-on: windows-latest  # Или 'ubuntu-latest', если ваш проект не зависит от Windows
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up build environment
+      run: |
+        echo "Установка необходимых зависимостей"
+        # Здесь вы можете установить необходимые зависимости для сборки вашего проекта
+
+    - name: Build the project
+      run: |
+        echo "Сборка проекта"
+        # Здесь вы можете добавить команды сборки, например:
+        # dotnet build
+        # или
+        # npm install и затем npm run build
+
+    - name: Run tests
+      run: |
+        echo "Запуск тестов"
+        # Добавьте команду для запуска тестов, например:
+        # dotnet test
+        # или
+        # npm test
+
+    - name: Deploy
+      run: |
+        echo "Деплой приложения"
+        # Здесь вы можете добавить команды для деплоя, если это необходимо.
+        # Например, использование scp для передачи файлов на сервер или вызов API для деплоя.
